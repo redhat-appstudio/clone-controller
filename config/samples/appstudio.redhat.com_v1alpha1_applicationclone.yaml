@@ -1,0 +1,12 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ApplicationClone
+metadata:
+  labels:
+    app.kubernetes.io/name: applicationclone
+    app.kubernetes.io/instance: applicationclone-sample
+    app.kubernetes.io/part-of: applicationclone
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: applicationclone
+  name: applicationclone-sample
+spec:
+  # TODO(user): Add fields here

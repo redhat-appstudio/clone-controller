@@ -1,0 +1,96 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.1
+  creationTimestamp: null
+  name: applicationclones.appstudio.redhat.com
+spec:
+  group: appstudio.redhat.com
+  names:
+    kind: ApplicationClone
+    listKind: ApplicationCloneList
+    plural: applicationclones
+    singular: applicationclone
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ApplicationClone is the Schema for the applicationclones API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ApplicationCloneSpec defines the desired state of ApplicationClone
+            properties:
+              componentSources:
+                description: ComponentSources lists the Components that be built from
+                  source code
+                items:
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+                  type: object
+                type: array
+              from:
+                description: From specifies the Application that would be cloned into
+                  the current namespace
+                properties:
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - from
+            type: object
+          status:
+            description: ApplicationCloneStatus defines the observed state of ApplicationClone
+            properties:
+              error:
+                type: string
+              lastAttempt:
+                type: string
+              lastSuccessfulAttempt:
+                type: string
+              resources:
+                description: List of Resources that were cloned
+                items:
+                  properties:
+                    kind:
+                      type: string
+                    name:
+                      type: string
+                  required:
+                  - kind
+                  - name
+                  type: object
+                type: array
+            required:
+            - error
+            - lastAttempt
+            - lastSuccessfulAttempt
+            - resources
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
