@@ -23,7 +23,7 @@ spec:
     - name: component-b
 ```
 
-After verifying if the requesting actor is authorized to read resources from the namespace from which the `Application`` is
+After verifying if the requesting actor is authorized to read resources from the namespace from which the `Application` is
 being cloned (TODO), the reconciler copies over the following resources to the namespace where the `ApplicationClone` CR was created.
 
 * The `Application` CR,
@@ -80,6 +80,7 @@ metadata:
   name: applicationclone-sample
   namespace: target-ns
 spec:
+  autoSync: true
   from:
     namespace: source-ns
     name: billing-app
